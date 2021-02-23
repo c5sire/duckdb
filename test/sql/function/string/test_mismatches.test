@@ -9,16 +9,27 @@ statement ok
 CREATE TABLE strings(s VARCHAR)
 
 statement ok
-INSERT INTO strings VALUES ('hello'), ('hallo'), ('aloha'), ('hoi'), ('world'), (NULL)
+INSERT INTO strings VALUES ('hello'), ('hallo'), ('aloha'), ('hoi'), ('world'), (NULL), ('')
 
 # normal length
 query I
 SELECT mismatches(s, 'hallo') FROM strings ORDER BY s
 ----
 NULL
+-1
 5
 0
 1
 -1
 4
 
+query I
+SELECT mismatches(s, '') FROM strings ORDER BY s
+----
+NULL
+0
+-1
+-1
+-1
+-1
+-1
